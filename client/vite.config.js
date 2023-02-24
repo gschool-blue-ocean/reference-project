@@ -3,14 +3,14 @@ export default {
     proxy: {
       "/api": process.env.API_URL,
     },
-    port: process.env.PORT
+    port: process.env.PORT,
   },
   cacheDir: "../node_modules/.vite",
   test: {
     environment: "happy-dom",
     watch: false,
     cache: {
-      dir: "../node_modules/.vitest"
-    }
+      dir: "../node_modules/.vitest",
+    },
   },
 };

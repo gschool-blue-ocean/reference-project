@@ -8,8 +8,12 @@ const Counter = () => {
 
   return (
     <span className={c.root}>
-      <button className={c.action} onClick={increment}>+</button>
-      <button className={c.action} onClick={decrement}>-</button>
+      <button className={c.action} onClick={increment}>
+        +
+      </button>
+      <button className={c.action} onClick={decrement}>
+        -
+      </button>
       <span data-testid="count">{count}</span>
     </span>
   );
