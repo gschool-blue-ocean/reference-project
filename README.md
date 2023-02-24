@@ -41,6 +41,15 @@ It uses vite as the module bundler and dotenv for configuration. It's organized 
 
 ## Useful Commands
 
-Run command in the context of a container `docker exec -t -i <> ls`
+Run command in the context of a container `docker exec ls`
 
 Get IP address of a container running in docker: `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id`
+
+## TODO
+
+1. Update README.
+1. Try to deploy.
+1. Add react-router, some styles, and components.
+1. Add backend and frontend testing + CI.
+1. Rename client/backend to server and app.
+1. Add seed file.

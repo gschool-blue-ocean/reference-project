@@ -6,4 +6,11 @@ export default {
     port: process.env.PORT
   },
   cacheDir: "../node_modules/.vite",
+  test: {
+    environment: "happy-dom",
+    watch: false,
+    cache: {
+      dir: "../node_modules/.vitest"
+    }
+  },
 };
