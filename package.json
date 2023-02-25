@@ -7,13 +7,13 @@
     "client"
   ],
   "scripts": {
-    "dev": "concurrently \"npm:dev:*\"",
-    "dev:client": "npm run dev --workspace=client",
-    "dev:api": "npm run dev --workspace=api",
-    "test": "npm run test:client",
-    "test:client": "npm run test --workspace=client",
+    "dev": "docker-compose up",
     "lint": "prettier --check .",
-    "lint:fix": "prettier --write ."
+    "test": "npm run test:client",
+    "dev:api": "npm run dev --workspace=api",
+    "dev:client": "npm run dev --workspace=client",
+    "lint:fix": "prettier --write .",
+    "test:client": "npm run test --workspace=client"
   },
   "devDependencies": {
     "concurrently": "^7.1.0",

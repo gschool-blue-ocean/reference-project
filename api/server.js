@@ -13,6 +13,14 @@ app.get("/api/tasks", (req, res) => {
   });
 });
 
+app.delete("/api/tasks/:id", (req, res) => {
+  const { id } = req.params;
+
+  sql`DELETE FROM tasks WHERE id=${id}`.then((rows) => {
+    res.send(rows);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

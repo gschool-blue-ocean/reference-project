@@ -7,7 +7,7 @@ export default {
   },
   cacheDir: "../node_modules/.vite",
   test: {
-    environment: "happy-dom",
+    environment: "jsdom",
     watch: false,
     cache: {
       dir: "../node_modules/.vitest",

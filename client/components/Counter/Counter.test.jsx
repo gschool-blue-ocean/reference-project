@@ -1,12 +1,13 @@
 import React from "react";
 import { it, expect, afterEach } from "vitest";
-import { render, fireEvent, cleanup } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Counter from "./Counter.jsx";
 
 // Clear out DOM after each test so they are independent.
 afterEach(cleanup);
 
-it("increments count when increment button is clicked", () => {
+it("increments count when increment button is clicked", async () => {
   // Render the component with react-testing-library
   // https://testing-library.com/docs/react-testing-library/api#render
   const { getByText, getByTestId } = render(<Counter />);
@@ -19,13 +20,13 @@ it("increments count when increment button is clicked", () => {
   const incrementButton = getByText("+");
 
   // Simulate click event on increment button
-  fireEvent(incrementButton, new MouseEvent("click", { bubbles: true }));
+  await userEvent.click(incrementButton);
 
   // Assert that count value has been updated to 1
   expect(count.textContent).toBe("1");
 });
 
-it("decrements count when increment button is clicked", () => {
+it("decrements count when increment button is clicked", async () => {
   const { getByText, getByTestId } = render(<Counter />);
 
   const count = getByTestId("count");
@@ -33,7 +34,7 @@ it("decrements count when increment button is clicked", () => {
 
   const decrementButton = getByText("-");
 
-  fireEvent(decrementButton, new MouseEvent("click", { bubbles: true }));
+  await userEvent.click(decrementButton);
 
   expect(count.textContent).toBe("-1");
 });

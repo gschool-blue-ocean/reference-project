@@ -23,27 +23,37 @@ It uses vite as the module bundler and dotenv for configuration. It's organized 
 
 ## Scripts
 
-**Root**
+**`root`**
 
-- `npm run dev` - Runs the API server and hosts your frontend assets.
-- `npm run dev:server` - Runs the API server in watch mode.
-- `npm run dev:client` - Hosts your frontend assets.
+- `npm run dev` - Runs the entire development stack with docker-compose.
+  - `npm run dev:api` - Runs the API server in watch mode.
+  - `npm run dev:client` - Hosts your frontend assets.
+- `npm run lint` - Checks code for style issues.
+- `npm run lint:fix` - Fixes style issues in the codebase.
+- `npm run test` - Runs all tests
 
-**/client**
+"dev": "docker-compose up",
+"dev:api": "npm run dev --workspace=api",
+"dev:client": "npm run dev --workspace=client",
+"lint": "prettier --check .",
+"lint:fix": "prettier --write .",
+"test": "npm run test:client",
+"test:client": "npm run test --workspace=client"
+
+**`/client`**
 
 - `npm run dev` - Hosts your assets.
 - `npm run build` - Builds your assets (mainly used in CI/CD).
 
-**/server**
+**`/server`**
 
 - `npm run dev` - Runs the server in watch mode.
 - `npm run start` - Starts the server (mainly used when deploying).
 
 ## Useful Commands
 
-Run command in the context of a container `docker exec ls`
-
-Get IP address of a container running in docker: `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id`
+Run command in the context of a container: `docker exec <container_name> ls`
+Get IP address of a container running in docker: `docker inspect <container_name>`
 
 ## TODO
 
