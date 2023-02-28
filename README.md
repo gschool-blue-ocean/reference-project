@@ -1,59 +1,54 @@
 # Full-Stack React Example
 
-This repo contains an example of a full-stack application with an express backend and a React frontend.
-
-It uses vite as the module bundler and dotenv for configuration. It's organized as a mono-repo using [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces) which allows us to have our client and server in one repo.
-
-> **Note**: When you run `npm install` at the root, it will install all dependencies listed in `package.json`, `server/package.json`, and `client/package.json`.
-
-## Customizing the Template
-
-1. Create new repo using this one as a template.
-1. Pull that repo down.
-1. Update `./server/migration.sql` to the schema for your application.
+This repo contains an example of a full-stack application with an express backend, a React frontend, and a postgres database. It's designed to be a starting point for a blue ocean project, or a reference for those wanting to get testing, CI, or docker working in their respective projects.
 
 ## Development Setup
 
-1. Install dependencies: `npm install`
-1. Create your database: `createdb YOUR_DB`
-1. Run your migrations: `psql -f server/migration.sql YOUR_DB`
-1. Create your `.env` file: `cp .env.template .env`
-1. Add your info in `.env`
-1. Run the app: `npm run dev`
+The app can be started with two steps.
 
-## Scripts
+1. `cp .env.example .env`
+1. `docker-compose up`
+
+> To run tests, you should also run `npm install` in the root directory, `/api`, and `/client`
+
+## npm Scripts
 
 **`root`**
 
-- `npm run dev` - Runs the entire development stack with docker-compose.
-  - `npm run dev:api` - Runs the API server in watch mode.
-  - `npm run dev:client` - Hosts your frontend assets.
-- `npm run lint` - Checks code for style issues.
-- `npm run lint:fix` - Fixes style issues in the codebase.
-- `npm run test` - Runs all tests
-
-"dev": "docker-compose up",
-"dev:api": "npm run dev --workspace=api",
-"dev:client": "npm run dev --workspace=client",
-"lint": "prettier --check .",
-"lint:fix": "prettier --write .",
-"test": "npm run test:client",
-"test:client": "npm run test --workspace=client"
+- `dev` - Runs the entire development stack with docker-compose.
+- `lint` - Checks code for style issues.
+- `test` - Runs `test:client` and `test:api`
+- `ci` - Runs `lint` and `test`.
+- `test:client` - Runs frontend tests.
+- `test:api` - Runs backend tests.
 
 **`/client`**
 
-- `npm run dev` - Hosts your assets.
-- `npm run build` - Builds your assets (mainly used in CI/CD).
+- `dev` - Hosts your assets (executed by docker-compose).
+- `build` - Builds your assets for production.
+- `test` - Runs tests.
 
 **`/server`**
 
-- `npm run dev` - Runs the server in watch mode.
-- `npm run start` - Starts the server (mainly used when deploying).
+- `dev` - Runs the server in watch mode (executed by docker-compose).
+- `start` - Starts the production server.
+- `test` - Runs tests.
 
-## Useful Commands
+## Tech used
 
-Run command in the context of a container: `docker exec <container_name> ls`
-Get IP address of a container running in docker: `docker inspect <container_name>`
+- [`vite`](https://vitejs.dev/) - Module bundler, transpiler and dev server.
+- [`vitest`](https://vitest.dev/) - Test runner.
+- [`prettier`](https://prettier.io/) - Code formatter/checker.
+- [`react-testing-library`](https://testing-library.com/docs/react-testing-library/api/) - React component test helper.
+- [`msw`](https://testing-library.com/docs/react-testing-library/api/) - Request mocking library for writing frontend tests.
+- [`knex`](https://knexjs.org/) - Query builder and migration runner.
+- [`supertest`](https://github.com/ladjs/supertest) - HTTP request simulator for backend testing.
+- [`docker`](https://www.docker.com/) - Containerization framework for dev and deployment.
+
+## Useful Docker Commands
+
+- `docker exec <container_name_or_id> <command>` - Runs command in the context of a container.
+- `docker inspect <container_name_or_id>` - Displays info (including IP address) of a container running in docker:
 
 ## TODO
 

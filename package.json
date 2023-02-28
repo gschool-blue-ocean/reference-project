@@ -2,20 +2,13 @@
   "name": "full-stack-react",
   "version": "1.0.0",
   "type": "module",
-  "workspaces": [
-    "api",
-    "client"
-  ],
   "scripts": {
     "dev": "docker-compose up",
     "lint": "prettier --check .",
     "test": "concurrently \"npm:test:*\"",
     "ci": "npm run lint; npm run test",
-    "dev:api": "npm run dev --workspace=api",
-    "dev:client": "npm run dev --workspace=client",
-    "lint:fix": "prettier --write .",
-    "test:client": "npm run test --workspace=client",
-    "test:api": "npm run test --workspace=api"
+    "test:client": "npm run test --prefix=client",
+    "test:api": "npm run test --prefix=api"
   },
   "devDependencies": {
     "concurrently": "^7.1.0",

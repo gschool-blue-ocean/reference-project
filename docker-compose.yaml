@@ -2,6 +2,7 @@ version: "3.8"
 services:
   database:
     image: postgres:15-alpine
+    # Load all env vars from .env into the container's environment.
     env_file: .env
     expose:
       - 5432
@@ -18,8 +19,11 @@ services:
     ports:
       - ${API_PORT}:80
     volumes:
-      - .:/code
-    command: sh -c "npx knex migrate:latest --knexfile=./api/knexfile.js && npx knex seed:run --knexfile=./api/knexfile.js && npm run dev:api"
+      # This allows live reload inside a docker container.
+      - ./api:/code
+      # This prevents your local node_modules from overwriting the container's.
+      - /code/node_modules
+    command: sh -c "npx knex migrate:latest & npx knex seed:run && npm run dev"
   app:
     build: ./client
     environment:
@@ -30,7 +34,10 @@ services:
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
     volumes:
-      - .:/code
-    command: npm run dev:client
+      # This allows live reload inside a docker container.
+      - ./client:/code
+      # This prevents your local node_modules from overwriting the container's.
+      - /code/node_modules
+    command: npm run dev
 volumes:
   pg-data:
