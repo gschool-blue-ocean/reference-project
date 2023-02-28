@@ -1,14 +1,20 @@
-import { it, expect, beforeAll, afterEach } from "vitest";
+import { it, expect, beforeAll, afterEach, afterAll } from "vitest";
 import request from "supertest";
 import server from "./server.js";
 import db from "./db/db.js";
 
 beforeAll(() => {
+  // Run migrations against in-memory database.
   return db.migrate.latest();
 });
 
 afterEach(() => {
+  // Clear out table after each test.
   return db.table("tasks").truncate();
+});
+
+afterAll(() => {
+  return db.destroy();
 });
 
 it("GET /api/tasks returns tasks", async () => {
