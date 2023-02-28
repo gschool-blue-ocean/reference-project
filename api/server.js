@@ -1,26 +1,41 @@
 import express from "express";
-import postgres from "postgres";
+import db from "./db/db.js";
 
-const PORT = process.env.PORT;
-const sql = postgres(process.env.DATABASE_URL);
 const app = express();
 
 app.use(express.json());
 
-app.get("/api/tasks", (req, res) => {
-  sql`SELECT * FROM tasks`.then((rows) => {
-    res.send(rows);
-  });
+app.get("/api/tasks", async (req, res) => {
+  const rows = await db.table("tasks").select();
+  res.send(rows);
 });
 
-app.delete("/api/tasks/:id", (req, res) => {
+app.get("/api/tasks/:id", async (req, res) => {
+  const rows = await db.table("tasks").select().where("id", req.params.id);
+  if (rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(rows[0]);
+  }
+});
+
+app.post("/api/tasks", async (req, res, next) => {
+  const { description } = req.body;
+
+  const rows = await db.table("tasks").insert({ description }).catch(next);
+  res.send(rows);
+});
+
+app.delete("/api/tasks/:id", async (req, res) => {
   const { id } = req.params;
 
-  sql`DELETE FROM tasks WHERE id=${id}`.then((rows) => {
-    res.send(rows);
-  });
+  await db.table("tasks").where("id", id).delete();
+  res.sendStatus(204);
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Internal Server Error");
 });
+
+export default app;
