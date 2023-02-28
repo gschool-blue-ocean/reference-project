@@ -60,6 +60,5 @@ Get IP address of a container running in docker: `docker inspect <container_name
 1. Update README.
 1. Try to deploy.
 1. Add react-router, some styles, and components.
-1. Add backend and frontend testing + CI.
-1. Rename client/backend to server and app.
+1. Run frontend/backend tests in CI.
 1. Add seed file.
