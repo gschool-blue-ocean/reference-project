@@ -9,7 +9,17 @@ The app can be started with two steps.
 1. `cp .env.example .env`
 1. `docker-compose up`
 
-> To run tests, you should also run `npm install` in the root directory, `/api`, and `/client`
+The first command copies over all the environment variables into a file where you can change them without affecting the git repo.
+
+The second command starts up a container for the database, api server, and client dev server, all setup with live-reload when source files change.
+
+To run the tests, make sure you've installed all dependencies in the root, and `/api` and `/client` directories. You can do this with a single command:
+
+```
+npm install; npm install --prefix=api; npm install --prefix=client
+```
+
+> _NOTE_: After installing a new npm dependency, you have to run `docker-compose up --build` to install the new dependencies on the container.
 
 ## npm Scripts
 
@@ -48,11 +58,3 @@ The app can be started with two steps.
 
 - `docker exec <container_name_or_id> <command>` - Runs command in the context of a container.
 - `docker inspect <container_name_or_id>` - Displays info (including IP address) of a container running in docker.
-
-## TODO
-
-1. Update README.
-1. Try to deploy.
-1. Add react-router, some styles, and components.
-1. Run frontend/backend tests in CI.
-1. Add seed file.
