@@ -37,5 +37,3 @@ services:
     command: npm run dev
 volumes:
   pg-data:
-  api-deps:
-  app-deps:
