@@ -4,7 +4,7 @@ This repo contains an example of a full-stack application with an express backen
 
 ## Development Setup
 
-The app can be started with two steps.
+The app can be started with two steps:
 
 1. `cp .env.example .env`
 1. `docker-compose up`
@@ -19,7 +19,7 @@ To run the tests, make sure you've installed all dependencies in the root, and `
 npm install; npm install --prefix=api; npm install --prefix=client
 ```
 
-> _NOTE_: After installing a new npm dependency, you have to run `docker-compose up --build` to install the new dependencies on the container.
+> **NOTE**: After installing a new npm dependency, you have to run `docker-compose up --build` to install the new dependencies on the container.
 
 ## npm Scripts
 
