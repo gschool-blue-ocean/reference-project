@@ -1,4 +1,5 @@
 export default {
+  root: "src",
   server: {
     proxy: {
       "/api": process.env.API_URL,

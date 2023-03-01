@@ -15,9 +15,8 @@ The app can be started with two steps.
 
 **`root`**
 
-- `dev` - Runs the entire development stack with docker-compose.
 - `lint` - Checks code for style issues.
-- `test` - Runs `test:client` and `test:api`
+- `test` - Runs `test:client` and `test:api`.
 - `ci` - Runs `lint` and `test`.
 - `test:client` - Runs frontend tests.
 - `test:api` - Runs backend tests.
@@ -48,7 +47,7 @@ The app can be started with two steps.
 ## Useful Docker Commands
 
 - `docker exec <container_name_or_id> <command>` - Runs command in the context of a container.
-- `docker inspect <container_name_or_id>` - Displays info (including IP address) of a container running in docker:
+- `docker inspect <container_name_or_id>` - Displays info (including IP address) of a container running in docker.
 
 ## TODO
 

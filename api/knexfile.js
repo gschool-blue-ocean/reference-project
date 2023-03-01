@@ -3,10 +3,10 @@ export default {
     client: "pg",
     connection: process.env.DATABASE_URL,
     migrations: {
-      directory: new URL("./db/migrations", import.meta.url).pathname,
+      directory: new URL("./src/db/migrations", import.meta.url).pathname,
     },
     seeds: {
-      directory: new URL("./db/seeds", import.meta.url).pathname,
+      directory: new URL("./src/db/seeds", import.meta.url).pathname,
     },
   },
   test: {
@@ -15,10 +15,10 @@ export default {
       filename: ":memory:",
     },
     migrations: {
-      directory: new URL("./db/migrations", import.meta.url).pathname,
+      directory: new URL("./src/db/migrations", import.meta.url).pathname,
     },
     seeds: {
-      directory: new URL("./db/seeds", import.meta.url).pathname,
+      directory: new URL("./src/db/seeds", import.meta.url).pathname,
     },
     useNullAsDefault: true,
   },
