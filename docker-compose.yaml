@@ -19,8 +19,11 @@ services:
     ports:
       - ${API_PORT}:80
     volumes:
-      # This allows live reload inside a docker container.
+      # This allows live reload inside a docker container by mapping your
+      # filesystem to the container's.
       - ./api/src:/code/src
+    # TODO: This runs migrations and seeds everytime you start the app. That
+    # might be unexpected.
     command: sh -c "npx knex migrate:latest & npx knex seed:run && npm run dev"
   app:
     build: ./client
@@ -32,7 +35,8 @@ services:
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
     volumes:
-      # This allows live reload inside a docker container.
+      # This allows live reload inside a docker container by mapping your
+      # filesystem to the container's.
       - ./client/src:/code/src
     command: npm run dev
 volumes:
