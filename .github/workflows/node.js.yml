@@ -18,4 +18,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm ci
-      - run: npm test
+      - run: npm ci --prefix=client
+      - run: npm ci --prefix=api
+      - run: npm run ci
