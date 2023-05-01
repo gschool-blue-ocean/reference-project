@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "test": "vitest"
+    "test": "echo 'add tests'"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",

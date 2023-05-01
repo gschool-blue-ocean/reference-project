@@ -24,8 +24,6 @@ services:
       # This allows live reload inside a docker container by mapping your
       # filesystem to the container's.
       - ./api/src:/code/src
-    # TODO: This runs migrations and seeds everytime you start the app. That
-    # might be unexpected.
     command: npm run dev
   app:
     build: ./client
