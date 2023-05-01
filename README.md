@@ -6,18 +6,9 @@ This repo contains an example of a full-stack application with an express backen
 
 The app can be started with two steps:
 
-1. `cp .env.example .env`
-1. `docker-compose up`
-
-The first command copies over all the environment variables into a file where you can change them without affecting the git repo.
-
-The second command starts up a container for the database, api server, and client dev server, all setup with live-reload when source files change.
-
-To run the tests, make sure you've installed all dependencies in the root, and `/api` and `/client` directories. You can do this with a single command:
-
-```
-npm install; npm install --prefix=api; npm install --prefix=client
-```
+1. `cp .env.example .env` - Copy over required environment variables.
+1. `npm install; npm install --prefix=api; npm install --prefix=client` - Install all dependencies.
+1. `docker-compose up` - Run Project.
 
 > **NOTE**: After installing a new npm dependency, you have to run `docker-compose up --build` to install the new dependencies on the container.
 
@@ -50,7 +41,6 @@ npm install; npm install --prefix=api; npm install --prefix=client
 - [`prettier`](https://prettier.io/) - Code formatter/checker.
 - [`react-testing-library`](https://testing-library.com/docs/react-testing-library/api/) - React component test helper.
 - [`msw`](https://testing-library.com/docs/react-testing-library/api/) - Request mocking library for writing frontend tests.
-- [`knex`](https://knexjs.org/) - Query builder and migration runner.
 - [`supertest`](https://github.com/ladjs/supertest) - HTTP request simulator for backend testing.
 - [`docker`](https://www.docker.com/) - Containerization framework for dev and deployment.
 
