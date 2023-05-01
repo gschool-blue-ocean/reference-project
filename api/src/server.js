@@ -1,39 +1,43 @@
 import express from "express";
-import db from "./db/db.js";
+
+import pg from "pg";
+
+const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
 const app = express();
 
 app.use(express.json());
 
 app.get("/api/tasks", async (req, res, next) => {
-  const rows = await db.table("tasks").select().catch(next);
-  res.send(rows);
+  const result = await db.query("SELECT * FROM tasks").catch(next);
+  res.send(result.rows);
 });
 
 app.get("/api/tasks/:id", async (req, res, next) => {
-  const rows = await db
-    .table("tasks")
-    .select()
-    .where("id", req.params.id)
+  const result = await db
+    .query("SELECT * FROM tasks WHERE id = $1", [req.params.id])
     .catch(next);
-  if (rows.length === 0) {
+
+  if (result.rows.length === 0) {
     res.sendStatus(404);
   } else {
-    res.send(rows[0]);
+    res.send(result.rows[0]);
   }
 });
 
 app.post("/api/tasks", async (req, res, next) => {
   const { description } = req.body;
 
-  const rows = await db.table("tasks").insert({ description }).catch(next);
-  res.send(rows);
+  const result = await db
+    .query("INSERT INTO tasks(description) VALUES ($1)", [description])
+    .catch(next);
+  res.send(result.rows[0]);
 });
 
 app.delete("/api/tasks/:id", async (req, res, next) => {
   const { id } = req.params;
 
-  await db.table("tasks").where("id", id).delete().catch(next);
+  await db.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
   res.sendStatus(204);
 });
 
